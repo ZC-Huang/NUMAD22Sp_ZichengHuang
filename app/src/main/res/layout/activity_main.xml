@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
@@ -19,8 +20,20 @@
         android:id="@+id/buttonReadMe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="59dp"
         android:text="About Me"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="623dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/buttonC" />
+
+    <Button
+        android:id="@+id/buttonC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:text="Clicky Clicky"
+        app:layout_constraintBottom_toTopOf="@+id/buttonReadMe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

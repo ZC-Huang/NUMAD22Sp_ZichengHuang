@@ -10,6 +10,12 @@ android {
             keyPassword '940201Soda'
             keyAlias 'Key1'
         }
+        release {
+            storeFile file('C:\\Users\\pttpp\\Documents\\Keystore\\ZHKeystore.jks')
+            storePassword '940201Soda'
+            keyAlias 'Key1'
+            keyPassword '940201Soda'
+        }
     }
     compileSdk 32
 
@@ -27,6 +33,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
