@@ -19,6 +19,7 @@ public class SixButtons extends AppCompatActivity {
 
     //change textview on button click
     private void changeTextViewOnButtonClick() {
+        //give each button individual id to change the textview
         TextView changingText = (TextView) findViewById(R.id.textView2);
         Button changeTextButtonA = (Button) findViewById(R.id.buttonA);
         Button changeTextButtonB = (Button) findViewById(R.id.buttonB);
@@ -27,6 +28,7 @@ public class SixButtons extends AppCompatActivity {
         Button changeTextButtonE = (Button) findViewById(R.id.buttonE);
         Button changeTextButtonF = (Button) findViewById(R.id.buttonF);
 
+        //use setText to change textView
         changeTextButtonA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
