@@ -1,8 +1,6 @@
 package edu.neu.numad22sp_zichenghuang;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.widget.AdapterView;
+import android.widget.TextView;
 
 public class ItemCard implements ItemClickListener {
 

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -15,10 +16,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class LinkCollector extends AppCompatActivity {
+public class LinkCollector extends AppCompatActivity implements ExampleDialog.ExampleDialogListener {
     //Creating the essential parts needed for a Recycler view to work: RecyclerView, Adapter, LayoutManager
     private ArrayList<ItemCard> itemList = new ArrayList<>();
-    ;
+
+    private TextView textViewLink;
+    private String testText;
 
     private RecyclerView recyclerView;
     private RviewAdapter rviewAdapter;
@@ -36,10 +39,13 @@ public class LinkCollector extends AppCompatActivity {
 
         init(savedInstanceState);
 
+        textViewLink = (TextView) findViewById(R.id.textView3);
+
         addButton = findViewById(R.id.addButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                openDialog();
                 int pos = 0;
                 addItem(pos);
             }
@@ -63,6 +69,11 @@ public class LinkCollector extends AppCompatActivity {
             }
         });
         itemTouchHelper.attachToRecyclerView(recyclerView);
+    }
+
+    public void openDialog() {
+        ExampleDialog exampleDialog = new ExampleDialog();
+        exampleDialog.show(getSupportFragmentManager(), "example dialog");
     }
 
 
@@ -115,7 +126,7 @@ public class LinkCollector extends AppCompatActivity {
                 }
             }
         }
-        // The first time to opne this Activity
+        // The first time to open this Activity
         else {
             ItemCard item1 = new ItemCard("Example description", false);
 
@@ -160,9 +171,15 @@ public class LinkCollector extends AppCompatActivity {
     }
 
     private void addItem(int position) {
-        itemList.add(position, new ItemCard("empty", false));
+        testText = textViewLink.getText().toString();
+        itemList.add(position, new ItemCard(testText, false));
         Toast.makeText(LinkCollector.this, "Add an item", Toast.LENGTH_SHORT).show();
 
         rviewAdapter.notifyItemInserted(position);
+    }
+
+    @Override
+    public void applyTexts(String link) {
+        textViewLink.setText(link);
     }
 }
