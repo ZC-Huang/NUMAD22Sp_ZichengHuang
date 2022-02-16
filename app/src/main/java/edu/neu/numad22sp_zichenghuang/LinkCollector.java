@@ -32,7 +32,7 @@ public class LinkCollector extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_link_collector);
 
         init(savedInstanceState);
 
@@ -103,16 +103,12 @@ public class LinkCollector extends AppCompatActivity {
 
                 // Retrieve keys we stored in the instance
                 for (int i = 0; i < size; i++) {
-                    Integer imgId = savedInstanceState.getInt(KEY_OF_INSTANCE + i + "0");
-                    String itemName = savedInstanceState.getString(KEY_OF_INSTANCE + i + "1");
                     String linkAddress = savedInstanceState.getString(KEY_OF_INSTANCE + i + "2");
                     boolean isChecked = savedInstanceState.getBoolean(KEY_OF_INSTANCE + i + "3");
 
                     // We need to make sure names such as "XXX(checked)" will not duplicate
                     // Use a tricky way to solve this problem, not the best though
-                    if (isChecked) {
-                        itemName = itemName.substring(0, itemName.lastIndexOf("("));
-                    }
+
                     ItemCard itemCard = new ItemCard(linkAddress, isChecked);
 
                     itemList.add(itemCard);
@@ -134,7 +130,7 @@ public class LinkCollector extends AppCompatActivity {
 
         rLayoutManger = new LinearLayoutManager(this);
 
-        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view1);
         recyclerView.setHasFixedSize(true);
 
         rviewAdapter = new RviewAdapter(itemList);
