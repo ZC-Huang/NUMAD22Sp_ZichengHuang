@@ -46,8 +46,6 @@ public class LinkCollector extends AppCompatActivity implements ExampleDialog.Ex
             @Override
             public void onClick(View v) {
                 openDialog();
-                int pos = 0;
-                addItem(pos);
             }
         });
 
@@ -181,5 +179,7 @@ public class LinkCollector extends AppCompatActivity implements ExampleDialog.Ex
     @Override
     public void applyTexts(String link) {
         textViewLink.setText(link);
+        int pos = 0;
+        addItem(pos);
     }
 }
