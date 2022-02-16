@@ -2,6 +2,7 @@ package edu.neu.numad22sp_zichenghuang;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -27,6 +29,7 @@ public class LinkCollector extends AppCompatActivity implements ExampleDialog.Ex
     private RviewAdapter rviewAdapter;
     private RecyclerView.LayoutManager rLayoutManger;
     private FloatingActionButton addButton;
+    private ConstraintLayout constraintLayout;
 
     private static final String KEY_OF_INSTANCE = "KEY_OF_INSTANCE";
     private static final String NUMBER_OF_ITEMS = "NUMBER_OF_ITEMS";
@@ -40,6 +43,7 @@ public class LinkCollector extends AppCompatActivity implements ExampleDialog.Ex
         init(savedInstanceState);
 
         textViewLink = (TextView) findViewById(R.id.textView3);
+        constraintLayout = findViewById(R.id.constraintLayout);
 
         addButton = findViewById(R.id.addButton);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -171,7 +175,8 @@ public class LinkCollector extends AppCompatActivity implements ExampleDialog.Ex
     private void addItem(int position) {
         testText = textViewLink.getText().toString();
         itemList.add(position, new ItemCard(testText, false));
-        Toast.makeText(LinkCollector.this, "Add an item", Toast.LENGTH_SHORT).show();
+
+        showSnackbar();
 
         rviewAdapter.notifyItemInserted(position);
     }
@@ -181,5 +186,17 @@ public class LinkCollector extends AppCompatActivity implements ExampleDialog.Ex
         textViewLink.setText(link);
         int pos = 0;
         addItem(pos);
+    }
+
+    public void showSnackbar(){
+        Snackbar snackbar = Snackbar.make(constraintLayout, "Link Added", Snackbar.LENGTH_INDEFINITE)
+                .setAction("Dismiss", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar snackbar1 = Snackbar.make(constraintLayout, "Dismissed", Snackbar.LENGTH_SHORT);
+                        snackbar1.show();
+                    }
+                });
+        snackbar.show();
     }
 }
