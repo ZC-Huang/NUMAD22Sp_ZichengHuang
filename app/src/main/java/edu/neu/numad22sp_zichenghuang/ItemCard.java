@@ -1,8 +1,12 @@
 package edu.neu.numad22sp_zichenghuang;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.widget.TextView;
 
-public class ItemCard implements ItemClickListener {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ItemCard extends AppCompatActivity implements ItemClickListener {
 
     private final String linkAddress;
     private boolean isChecked;
@@ -22,7 +26,14 @@ public class ItemCard implements ItemClickListener {
 
     @Override
     public void onItemClick(int position) {
-        isChecked = !isChecked;
+        String url;
+        url = this.getLinkAddress();
+        gotoUrl(url);
+    }
+
+    private void gotoUrl(String linkAddress) {
+        Uri uri = Uri.parse(linkAddress);
+        startActivity(new Intent(Intent.ACTION_VIEW, uri));
     }
 
     @Override

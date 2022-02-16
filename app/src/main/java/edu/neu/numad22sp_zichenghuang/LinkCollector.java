@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -62,11 +64,14 @@ public class LinkCollector extends AppCompatActivity implements ExampleDialog.Ex
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                Toast.makeText(LinkCollector.this, "Delete an item", Toast.LENGTH_SHORT).show();
+
                 int position = viewHolder.getLayoutPosition();
                 itemList.remove(position);
 
                 rviewAdapter.notifyItemRemoved(position);
+
+                Snackbar snackbar2 = Snackbar.make(constraintLayout, "Link Deleted", Snackbar.LENGTH_SHORT);
+                snackbar2.show();
 
             }
         });
@@ -198,5 +203,10 @@ public class LinkCollector extends AppCompatActivity implements ExampleDialog.Ex
                     }
                 });
         snackbar.show();
+    }
+
+    private void gotoUrl(String linkAddress) {
+        Uri uri = Uri.parse(linkAddress);
+        startActivity(new Intent(Intent.ACTION_VIEW, uri));
     }
 }
