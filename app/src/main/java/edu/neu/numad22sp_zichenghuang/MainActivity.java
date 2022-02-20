@@ -33,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        move=findViewById(R.id.button4);
+        move.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,Locator.class);
+                startActivity(intent);
+            }
+        });
 
         //get button
         Button btn = findViewById(R.id.buttonReadMe);
