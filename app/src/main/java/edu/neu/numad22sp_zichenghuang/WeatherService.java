@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,6 +24,8 @@ import java.util.concurrent.ExecutionException;
 
 public class WeatherService extends AppCompatActivity {
 
+    private ProgressBar pgsBar;
+
     Button search;
     TextView cityName;
     TextView showResults;
@@ -31,6 +34,7 @@ public class WeatherService extends AppCompatActivity {
 
     class getWeather extends AsyncTask<String, Void, String> {
 
+        //use httpurlconnection to communicate with API
         @Override
         protected String doInBackground(String... urls) {
             StringBuilder results = new StringBuilder();
@@ -62,7 +66,7 @@ public class WeatherService extends AppCompatActivity {
             super.onPostExecute(results);
             String output = "";
             try {
-
+                // converting JSON strings to be displayed
                 JSONObject jsonResponse = new JSONObject(results);
                 JSONArray jsonArray = jsonResponse.getJSONArray("weather");
                 JSONObject jsonObjectWeather = jsonArray.getJSONObject(0);
@@ -80,16 +84,7 @@ public class WeatherService extends AppCompatActivity {
                         + "\n Feels Like: " + df.format(feelsLike) + " °C"
                         + "\n Humidity: " + humidity + "%";
                 showResults.setText(output);
-                
-//                JSONObject jsonObject = new JSONObject(results);
-//                String weatherInfo = jsonObject.getString("main");
-//
-//                weatherInfo = weatherInfo.replace("temp", "Temperature");
-//                weatherInfo = weatherInfo.replace(",", "\n");
-//                weatherInfo = weatherInfo.replace("feels_like", "Feels Like");
-//                weatherInfo = weatherInfo.replace("temp_min", "Min Temperature");
-//                weatherInfo = weatherInfo.replace("temp_max", "Max Temperature");
-//                showResults.setText(weatherInfo);
+
             } catch(Exception e) {
                 e.printStackTrace();
             }
@@ -104,6 +99,7 @@ public class WeatherService extends AppCompatActivity {
         cityName = findViewById(R.id.cityInput);
         showResults = findViewById(R.id.weatherResults);
         search = findViewById(R.id.citySearchBtn);
+        pgsBar = (ProgressBar) findViewById(R.id.pBar);
 
         final String[] temp = {""};
 
@@ -111,8 +107,10 @@ public class WeatherService extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String cityInput = cityName.getText().toString();
+                // add a progress bar while loading
+                pgsBar.setVisibility(view.VISIBLE);
 
+                String cityInput = cityName.getText().toString();
 
 
                 getWeather task = new getWeather();
@@ -132,8 +130,10 @@ public class WeatherService extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 if(temp[0] == null) {
-                    showResults.setText("Not Found");
+                    showResults.setText("City Not Found");
                 }
+                // hide progress bar when finished
+                pgsBar.setVisibility(view.GONE);
             }
 
 
