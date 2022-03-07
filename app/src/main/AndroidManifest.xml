@@ -18,9 +18,6 @@
             android:name=".WeatherService"
             android:exported="false" />
         <activity
-            android:name=".WebService"
-            android:exported="false" />
-        <activity
             android:name=".Locator"
             android:exported="false" />
         <activity
