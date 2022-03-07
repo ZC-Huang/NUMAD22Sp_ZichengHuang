@@ -59,6 +59,7 @@ public class Locator extends AppCompatActivity {
         });
     }
 
+    //get location
     @SuppressLint("MissingPermission")
     private void getLocation() {
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
@@ -76,7 +77,7 @@ public class Locator extends AppCompatActivity {
                                 + address.get(0).getLatitude()
                         )));
                         textView_long.setText((Html.fromHtml(
-                                "<font color ='#6200EE'><b>Latitude :</b><br></font>"
+                                "<font color ='#6200EE'><b>Longitude :</b><br></font>"
                                         + address.get(0).getLongitude()
                         )));
                     } catch (IOException e) {

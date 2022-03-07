@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD22Sp_ZichengHuang">
         <activity
+            android:name=".WebService"
+            android:exported="false" />
+        <activity
             android:name=".Locator"
             android:exported="false" />
         <activity
