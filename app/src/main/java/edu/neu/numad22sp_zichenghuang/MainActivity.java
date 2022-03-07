@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,WebService.class);
+                Intent intent=new Intent(MainActivity.this,WeatherService.class);
                 startActivity(intent);
             }
         });
